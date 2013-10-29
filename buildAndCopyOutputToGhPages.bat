@@ -1,11 +1,16 @@
-build.bat
+rem build.bat
+
 
 git checkout gh-pages
 
-ATTRIB +H ./output/
-FOR /D %%i IN (".\*") DO RD /S /Q "%%i" DEL /Q ".\*.*"
-ATTRIB -H ./output/
 
-robocopy ./output/ . /E
+if %errorlevel% neq 0 exit /b %errorlevel%
 
-RD ./output
+
+REM ATTRIB +H ./output/
+REM FOR /D %%i IN (".\*") DO RD /S /Q "%%i" DEL /Q ".\*.*"
+REM ATTRIB -H ./output/
+
+REM robocopy ./output/ . /E
+
+REM RD ./output
