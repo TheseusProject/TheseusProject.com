@@ -1,0 +1,33 @@
+---
+layout: page
+---
+@inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
+
+<div class="entry-container">
+	<div class='entry'>
+		<h1>@Model.Title</h1>
+		<div class="postdate">@Model.Page.Date.ToString("d MMM, yyyy")
+            @if(Model.Page.Tags.Any())
+			{
+                <ul>
+			    @foreach(var tag in Model.Page.Tags)
+			    {	
+                    <li><a href="/tag/@tag">@tag</a></li>
+                }</ul>
+            }
+		</div>
+		@Raw(Model.Content)
+	</div>
+</div>
+<div id="page-navigation"> 
+	<div class="left">@if (Model.Previous != null)
+                      {
+                          <a href="@Model.Previous.Url" title="Previous Post: @Model.Previous.Title">&larr; @Model.Previous.Title</a>
+                      }</div> 
+	<div class="right">@if (Model.Next != null)
+                       {
+                           <a href="@Model.Next.Url" title="next Post: @Model.Next.Title">@Model.Next.Title &rarr; </a>
+                       }</div> 
+	<div class="clear">&nbsp;</div>
+</div> 
+

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Feed Name</title>
+  <link href="http://domain/"/>
+  <link type="application/atom+xml" rel="self" href="http://domain/atom.xml"/>
+  <updated>2013-10-29T12:32:12</updated>
+  <id>http://domain/</id>
+  <author>
+    <name>Author</name>
+    <email>Email</email>
+  </author>
+
+      <entry>
+          <id>http://domain//2013/10/29/what-a-fuss.html</id>
+          <link type="text/html" rel="alternate" href="http://domain//2013/10/29/what-a-fuss.html"/>
+          <title>Whats all the fuss about</title>
+          <updated>2013-10-29T00:00:00</updated>
+          <author>
+              <name>Author</name>
+              <uri>http://domain/</uri>
+          </author>
+          <content type="html">&lt;p&gt;Welcome to the project, so your likely to want to know what this is all about.&lt;/p&gt;
+&lt;p&gt;Where do we begine, I suppose I should give you an overview of what Theseus is. &lt;/p&gt;
+&lt;p&gt;Theseus is a screen/document scraping/processing engine that is designed to allow you to write applications,
+against our native .net library or via our JavaScript&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; rel=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; runtime, to request webpages, process JSON
+APIs, or download and process Excel/CSV&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; rel=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; documents all from the web&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; rel=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;h3&gt;Part 1.. the core.&lt;/h3&gt;
+&lt;p&gt;Firstly there is the open source (or soon to be) Theseus engine.&lt;/p&gt;
+&lt;p&gt;The Theseus Engine is made up of 3 main components;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The core engine, this is the virtual web browser, responsible for keep state between requests, 
+   and processing the different types of documents back into a common interface, so if you first 
+   request a web page, then move onto downloading an Excel report the core will make t so you shoudn&#39;t
+   need to know the differences of the formats&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; rel=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;The JavaScript runtime, this allows you to run a script&lt;sup id=&quot;fnref:5&quot;&gt;&lt;a href=&quot;#fn:5&quot; rel=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;, with access to the core virtual web browser, and have it return an &lt;code&gt;Object&lt;/code&gt; back&lt;sup id=&quot;fnref:6&quot;&gt;&lt;a href=&quot;#fn:6&quot; rel=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finaly the Command Line runner, this is a wrapper around the JavaScript runtime that lets you run your scripts and returns JSON documents back as output.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Part 2.. the platform&lt;/h3&gt;
+&lt;p&gt;Secondly we are planning a cloud hosting platform for your Theseus scripts, the platform will support all the
+features of the command line app so you will be easly be able to develop and test your scripts locally before 
+uploading them to be hosted in the cloud.&lt;/p&gt;
+&lt;p&gt;The platform will have the option for you to share your scripts for anyone to use or copy... or for a fee we 
+will support private repositories, for those more sensative scripts.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&quot;fn:2&quot;&gt;
+&lt;p&gt;Initally we will be supporting writing scripts in both JavaScript and CoffeeScript but hope to support 
+  other lnaguage that compile down to native JavaScript i.e. TypeScript.&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn:1&quot;&gt;
+&lt;p&gt;This support is for .xls, .xlsx, and .csv formats.&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn:3&quot;&gt;
+&lt;p&gt;We expose a virtual web browser, so even if the website you wish to access is behind login screen that uses cookie authentication then 
+  we still have you covered.&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn:4&quot;&gt;
+&lt;p&gt;The only exception is the query API, the query syntax is based on the common sytax of the relavent underlying content type, e.g. you will use CSS selectors when trying to extract content form HTML, but for extracting infor form XML it XPath, or it the Excel Cell lookup syntax (i.e. &lt;code&gt;A4:B7&lt;/code&gt;).&amp;nbsp;&lt;a href=&quot;#fnref:4&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn:5&quot;&gt;
+&lt;p&gt;you can also create script across multiple files and include them backtogether using the CommonJS Module syntaxt, this supports mixing script languages, for example you could require a *.coffee script file into a *.js script file.&amp;nbsp;&lt;a href=&quot;#fnref:5&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&quot;fn:6&quot;&gt;
+&lt;p&gt;We support you getting back anu POCO object that can be deserialized via the JSON.Net library.&amp;nbsp;&lt;a href=&quot;#fnref:6&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</content>
+      </entry>
+</feed>
