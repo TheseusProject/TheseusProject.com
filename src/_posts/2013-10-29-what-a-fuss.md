@@ -37,8 +37,10 @@ The Theseus Engine is made up of 3 main components;
 3. Finaly the Command Line runner, this is a wrapper around the JavaScript runtime that lets you run your scripts and returns JSON documents back as output.
 
 [^4]: The only exception is the query API, the query syntax is based on the common sytax of the relavent underlying content type, e.g. you will use CSS selectors when trying to extract content form HTML, but for extracting infor form XML it XPath, or it the Excel Cell lookup syntax (i.e. `A4:B7`).
+
 [^5]: you can also create script across multiple files and include them backtogether using the CommonJS Module syntaxt, this supports mixing script languages, for example you could require a *.coffee script file into a *.js script file.
-[^6]: We support you getting back anu POCO object that can be deserialized via the JSON.Net library.
+
+[^6]: We support you getting back any POCO object that can be deserialized via the JSON.Net library.
 
 ###Part 2.. the platform
 

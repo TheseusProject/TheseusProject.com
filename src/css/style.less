@@ -113,12 +113,17 @@ img
 
 
 .footnotes {
-    font-size: 0.8;
+    font-size: 0.8em;
 
-    li:target {
-    -webkit-animation: target-fade 3s 1;
-    -moz-animation: target-fade 3s 1;
-}
+    li:target 
+    {
+        -webkit-animation: target-fade 3s 1;
+        -moz-animation: target-fade 3s 1;
+    }
+    li:hover 
+    {
+       background-color: rgba(0,0,0,.1);
+    }
 
 }
 

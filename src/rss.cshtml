@@ -1,5 +1,6 @@
 ---
 layout: nil
+ext : .xml
 ---
 @model Pretzel.Logic.Templating.Context.PageContext
 <?xml version="1.0" ?>
@@ -7,7 +8,7 @@ layout: nil
 <channel>
     <title>Feed Name</title>
     <link>http://domain/</link>
-    <atom:link href="http://domain/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://TheseusProject.com/rss.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-au</language>
     <pubDate>@Model.Site.Time.ToString("ddd, dd MMM yyyy H:mm:ss K")</pubDate>
@@ -17,13 +18,17 @@ layout: nil
     {
         <item>
             <title>@post.Title</title>
-            <link>http://domain@post.Url</link>
+            <author>@post["Author"]</author>
+            @Raw("<link>")http://TheseusProject.com@(post.Url)@Raw("</link>")
+
             <pubDate>@post.Date.ToString("ddd, dd MMM yyyy H:mm:ss K")</pubDate>
             <author>Author</author>
-            <guid>http://domain@post.Url</guid>
+            <guid>http://TheseusProject.com@(post.Url)</guid>
             <description>@post.Content</description>
         </item>
     }
 
   </channel> 
 </rss>
+            
+           

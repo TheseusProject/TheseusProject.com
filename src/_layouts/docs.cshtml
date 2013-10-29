@@ -1,0 +1,19 @@
+﻿---
+layout: layout
+---
+@inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
+
+
+<div class="entry-container">
+	<div class='entry'>
+		<h1>@Model.Title</h1>
+	
+<ul id="nav">
+    <li><a href="/docs/javascript.html">JavaScript API</a></li>
+    <li><a href="/docs/clr.html">.Net API - Coming soon</a></li>
+    <li><a href="/docs/commandline.html">Command Line API</a></li>
+</ul>
+
+		@Raw(Model.Content)
+	</div>
+</div>

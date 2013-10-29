@@ -1,0 +1,33 @@
+---
+layout: nil
+ext : .xml
+---
+@model Pretzel.Logic.Templating.Context.PageContext
+
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Theseus Project</title>
+  <link href="http://TheseusProject.com/"/>
+  <link type="application/atom+xml" rel="self" href="http://TheseusProject.com/atom.xml"/>
+  <updated>@Model.Site.Time.ToString("s")</updated>
+  <id>http://TheseusProject.com/</id>
+  <author>
+    <name>Scott Williams</name>
+    <email>scott@theseusproject.com</email>
+  </author>
+
+  @foreach (var post in Model.Site.Posts)
+  {
+      <entry>
+          <id>http://TheseusProject.com/@post.Url</id>
+          <link type="text/html" rel="alternate" href="http://TheseusProject.com/@post.Url"/>
+          <title>@post.Title</title>
+          <updated>@post.Date.ToString("s")</updated>
+          <author>
+              <name>@post["Author"]</name>
+              <uri>http://TheseusProject.com/</uri>
+          </author>
+          <content type="html">@post.Content</content>
+      </entry>
+  }
+</feed>
