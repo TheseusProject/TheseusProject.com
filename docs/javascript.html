@@ -1,0 +1,220 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta content="en-au" http-equiv="Content-Language" />
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Blog Feed" />
+		<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Blog Feed" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<title>JavaScript API</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<link rel="shortcut icon" href="/img/favicon.ico" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="side">
+				<a href="/" id="home" title="home" alt="home"><img src="/img/theseus_logo.png" alt="Theseus Project" /></a>
+				<div id="hometext"><a href="/" >Theseus</a></div>
+				<div class="section">
+					<ul>
+						
+						<li><a href="/news.html">news</a></li>
+						<li><a href="/docs/index.html">docs</a></li>
+					</ul>
+				</div>
+                
+                
+			</div>
+			<div id="content">
+				
+<div class="entry-container">
+	<div class='entry'>
+		<h1>JavaScript API</h1>
+	
+<ul id="nav">
+    <li><a href="/docs/javascript.html">JavaScript API</a></li>
+    <li><a href="/docs/clr.html">.Net API - Coming soon</a></li>
+    <li><a href="/docs/commandline.html">Command Line API</a></li>
+</ul>
+
+		<h2 id="globals">Globals</h2>
+<p>The JavaScript runtime complies with <a href="http://www.ecmascript.org/">ECMAScript Edition 5</a>
+We add very little to the global environment over the standards, what we do add are</p>
+<h3 id="globals:args"><code>_args</code></h3>
+<p><code>_args</code> is a simple hash of key value pairs passed into the script are execution time.</p>
+<h4 id="globals:args:usage">Usage</h4>
+<pre><code>if (_args.key){
+    //do something because &quot;key&quot; is defined   
+}
+</code></pre>
+
+<p>or alernatively you could access like</p>
+<pre><code>if (_args[&quot;key&quot;]){
+    //do something because &quot;key&quot; is defined   
+}
+</code></pre>
+
+<h4 id="globals:args:remarks">Remarks</h4>
+<p>For the command line interface these can be passed in on the command line as paramaters (see [Command Line API]{#commandline.html#args}), but for hosted web interfaces these are likely to be querystring paramaters.</p>
+<h3 id="globals:require"><code>require(moduleName)</code></h3>
+<p><code>require(moduleName)</code> is a function used to load in user and internal modules (see <a href="#modules">modules</a>)</p>
+<h4>Paramaters</h4>
+<h5><code>moduleName</code></h5>
+<p>The name of the module to load, file extensions are optional.</p>
+<h4 id="globals:require:usage">Usage</h4>
+<pre><code>var browser = require('browser');
+</code></pre>
+
+<p>or</p>
+<pre><code>var myModule = require('lib/MyModule');
+</code></pre>
+
+<h4 id="globals:args:remarks">Remarks</h4>
+<p>If there is any ambiguity about weather to load an internal module vs a user module, internal ones win, but it very easy to force theseus to treat module names as user modules all you need to do is make sure you qualify the local path i.e. instead of requesting <code>require('module')</code> use <code>require('.\module')</code> instead.</p>
+<h3 id="globals:module"><code>module</code></h3>
+<p><code>module</code> has on property that it exposes, <code>module.exports</code> whatever you assign to <code>module.exports</code> will be what is returned from <code>require(moduleName)</code>.</p>
+<h3 id="globals:module"><code>exports</code></h3>
+<p>This is just a reference to <code>module.exports</code>.</p>
+<h2 id="modules">Modules</h2>
+<p>Modules use the CommonJS/Node.Js module pattern. We even go as far as making your root script a module and your response being what is exported.</p>
+<p>Modules are all singletons, i.e. no mater how meny times you call <code>require</code> in which ever script file then you will allways be retuend the exact same instance of a module, so any state is retained between calls, no mater which module is calling it.</p>
+<h3>User Modules</h3>
+<p>User modules are scripts in the the directory, or subdirectories, of your source folder. 
+The module name that is assigned to each script is based on its relative file name to the source directory.</p>
+<pre><code>Source directory
+    - App.js {root application module}
+    - [Lib]
+        - School.js
+        - List.js
+</code></pre>
+
+<p>Inside <code>App.js</code> you will be able to access the value <code>module.exports</code> from <code>[Lib]\School.js</code> by calling <code>var school = require('lib\school');</code> </p>
+<h3>Internal Modules</h3>
+<p>Internal modules are module with special permission, the more notable, and the one you will use the most is 
+<code>browser</code> this is the single entry point to access theseus virtual web browser.</p>
+<h4><code>browser</code></h4>
+<p>Access by calling <code>require('browser')</code>.</p>
+<p>this returns an instance of <a href="#browser"><code>Browser</code></a>.</p>
+<h2 id="browser">Browser</h2>
+<h3><code>get(url)</code></h3>
+<ul>
+<li><code>url</code> is a <code>string</code></li>
+</ul>
+<p>performs a http get request of the <code>url</code> and returns an instance of <a href="#browser:resource"><code>Resource</code></a></p>
+<h3><code>post(url, args)</code></h3>
+<ul>
+<li><code>url</code> is a <code>string</code></li>
+<li><code>args</code> is a javascript object that are to be form encoded as the postback paramaters</li>
+</ul>
+<p>performs a http get request of the <code>url</code> and returns an instance of <a href="#browser:resource"><code>Resource</code></a>;</p>
+<h3><code>submit(node)</code></h3>
+<ul>
+<li><code>node</code> is a <a href="#browser:node"><code>Node</code></a></li>
+</ul>
+<p>Used for submitting forms from an html based <a href="#browser:resource"><code>Resource</code></a></p>
+<p>We take the <code>node</code> find the relevent parent form element and then perform a <code>GET</code> or <code>POST</code> request based on the forms <code>method</code> attribute.</p>
+<h2 id="browser:resource">Resource</h2>
+<p>The resource is a single requested item, be that an HTML page, a JSON object or an Excel document, no matter what sort of resource it is the API is identical with the single exception of the Query syntax is resource type specific.</p>
+<h3><code>location</code></h3>
+<p>The final URL of the requested resource after any redirects have been followed.</p>
+<h3><code>status</code></h3>
+<p>The response status for the request. e.g 404, 401, 200 etc.</p>
+<h3><code>contentType</code></h3>
+<p>The value of the Content-Type HTTP header for the HTTP response.</p>
+<h3><code>contentLength</code></h3>
+<p>The value of the Content-Length HTTP header for the HTTP response.</p>
+<h3><code>root</code></h3>
+<p>This is the root <a href="#browser:node">node</a> of the request document, and the entry point for walking the node tree processing the content.</p>
+<h3><code>findAll(query)</code></h3>
+<ul>
+<li><code>query</code> is a <code>string</code> (see <a href="#query">Query Syntax</a>)</li>
+</ul>
+<p>Will search the entire resource and return an <code>Array</code> of <a href="#browser:node"><code>Node</code></a>s that match.</p>
+<h3><code>find(query)</code></h3>
+<ul>
+<li><code>query</code> is a <code>string</code> (see <a href="#query">Query Syntax</a>)</li>
+</ul>
+<p>Will search the entire resource and return the first matching <a href="#browser:node"><code>Node</code></a>.</p>
+<h2 id="browser:node">Node</h2>
+<h3><code>name</code></h3>
+<p>The name of the node, for example for an HTML reosurce the Name will be the Tag name.</p>
+<h3><code>text</code></h3>
+<p>The textual contents of the node.</p>
+<h3><code>value</code></h3>
+<p>The raw value of the node.</p>
+<h3><code>selected</code></h3>
+<p>Indercates weather this node is in a selected state.</p>
+<h3><code>attr</code></h3>
+<p>Is a simple object respresenting any other attributes of the node.</p>
+<p>For example in HTML and XML this is maps directly to the Element Attributes.</p>
+<h3><code>parent()</code></h3>
+<p>returns the parent <a href="#browser:node"><code>Node</code></a>.</p>
+<h3><code>next()</code></h3>
+<p>returns the next sibling <a href="#browser:node"><code>Node</code></a>.</p>
+<h3><code>previous()</code></h3>
+<p>returns the previous sibling <a href="#browser:node"><code>Node</code></a>.</p>
+<h3><code>children()</code></h3>
+<p>return an <code>Array</code> of children <a href="#browser:node"><code>Node</code></a>s</p>
+<h3><code>descendents()</code></h3>
+<p>return an <code>Array</code> of all the descendent <a href="#browser:node"><code>Node</code></a>s</p>
+<h3><code>findAll(query)</code></h3>
+<ul>
+<li><code>query</code> is a <code>string</code> (see <a href="#query">Query Syntax</a>)</li>
+</ul>
+<p>Will search the <a href="#browser:node"><code>Node</code></a>s relative to this node and return an <code>Array</code> of <a href="#browser:node"><code>Node</code></a>s that match.</p>
+<h3><code>find(query)</code></h3>
+<ul>
+<li><code>query</code> is a <code>string</code> (see <a href="#query">Query Syntax</a>)</li>
+</ul>
+<p>Will search the <a href="#browser:node"><code>Node</code></a>s relative to this node and return the first matching <a href="#browser:node"><code>Node</code></a>.</p>
+<h2 id="query">Query Syntax</h2>
+<h3>HTML Documents</h3>
+<p>For Html Documents the we support the CSS selector query syntax.</p>
+<p>For example to find all a tags inside the nav inside the header of a page you could use
+<code>resource.findAll('#header nav li a')</code></p>
+<h3>Excel Documents</h3>
+<p>For Excel Documents the we support the Excel style lookups.</p>
+<p>For example to find the cells A1, A2, B1 and B2 omn the 'SecondPage' work sheet you could use 
+<code>resource.findAll('SecondPage!A1:B2')</code></p>
+<h3>JSON Documents</h3>
+<p>For JSON Documents the we support the object path notation.</p>
+<p>For example if we had a JSON document as such 
+    {
+        name : &quot;name&quot;,
+        dob : {
+            month : 02,
+            day : 02,
+            year : 1984
+        }
+    }</p>
+<p>and you wished to access the year of birth you could use <code>resource.find('dob.year')</code></p>
+<h3>XML Documents</h3>
+<p>For XML Documents the we use XPath</p>
+<p>and you wished to access the year of birth you could use <code>resource.find('.\dob\year')</code></p>
+<h3>CSV Documents</h3>
+<p>For CSV Documents the we use and R0C0 syntax</p>
+<p>If you wanted to get the top 4 rows you could use <code>resource.findAll('R1:R4')</code></p>
+<p>now on each row you can use eather a column syntax or a header name 
+for example <code>row.findAll(ColNameStart:ColNameEnd)</code> or <code>row.findAll(C1:C4)</code></p>
+
+	</div>
+</div>
+
+                
+			</div>
+
+		</div>
+
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-45268820-1', 'theseusproject.com');
+          ga('send', 'pageview');
+
+        </script>
+	</body>
+</html>

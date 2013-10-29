@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Feed Name</title>
-  <link href="http://domain/"/>
-  <link type="application/atom+xml" rel="self" href="http://domain/atom.xml"/>
-  <updated>2013-10-29T13:39:18</updated>
-  <id>http://domain/</id>
+  <title>Theseus Project</title>
+  <link href="http://TheseusProject.com/"/>
+  <link type="application/atom+xml" rel="self" href="http://TheseusProject.com/atom.xml"/>
+  <updated>2013-10-29T18:47:45</updated>
+  <id>http://TheseusProject.com/</id>
   <author>
-    <name>Author</name>
-    <email>Email</email>
+    <name>Scott Williams</name>
+    <email>scott@theseusproject.com</email>
   </author>
 
       <entry>
-          <id>http://domain//2013/10/29/what-a-fuss.html</id>
-          <link type="text/html" rel="alternate" href="http://domain//2013/10/29/what-a-fuss.html"/>
+          <id>http://TheseusProject.com//2013/10/29/what-a-fuss.html</id>
+          <link type="text/html" rel="alternate" href="http://TheseusProject.com//2013/10/29/what-a-fuss.html"/>
           <title>Whats all the fuss about</title>
           <updated>2013-10-29T00:00:00</updated>
           <author>
-              <name>Author</name>
-              <uri>http://domain/</uri>
+              <name></name>
+              <uri>http://TheseusProject.com/</uri>
           </author>
           <content type="html">&lt;p&gt;Welcome to the project, so your likely to want to know what this is all about.&lt;/p&gt;
 &lt;p&gt;Where do we begine, I suppose I should give you an overview of what Theseus is. &lt;/p&gt;
@@ -65,7 +65,7 @@ will support private repositories, for those more sensative scripts.&lt;/p&gt;
 &lt;p&gt;you can also create script across multiple files and include them backtogether using the CommonJS Module syntaxt, this supports mixing script languages, for example you could require a *.coffee script file into a *.js script file.&amp;nbsp;&lt;a href=&quot;#fnref:5&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&quot;fn:6&quot;&gt;
-&lt;p&gt;We support you getting back anu POCO object that can be deserialized via the JSON.Net library.&amp;nbsp;&lt;a href=&quot;#fnref:6&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We support you getting back any POCO object that can be deserialized via the JSON.Net library.&amp;nbsp;&lt;a href=&quot;#fnref:6&quot; rev=&quot;footnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
