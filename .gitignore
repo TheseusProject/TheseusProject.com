@@ -218,3 +218,4 @@ pip-log.txt
 
 # Generated Site source
 src/_site/*
+output/*
