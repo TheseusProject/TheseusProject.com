@@ -1,5 +1,5 @@
-./tools/Pretzal.exe bake src
+.\tools\Pretzel.exe bake src
 
-rmdir ./output/
+rmdir .\output\
 
-robocopy ./src/_site/ ./output/ /E
+robocopy .\src\_site\ .\output\ /E
